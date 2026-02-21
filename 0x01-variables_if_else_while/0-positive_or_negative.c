@@ -20,8 +20,4 @@ int main(void)
 		printf("%d is negative\n", n);
 	return (0);
 }
-```
 
-Jya kuri:
-```
-https://github.com/keffalyssa/set-low_level_programming/new/main/0x01-variables_if_else_while
