@@ -20,5 +20,3 @@ int main(void)
 	putchar('\n');
 	return (0);
 }
-```
-https://github.com/keffalyssa/set-low_level_programming/new/main/0x01-variables_if_else_while
