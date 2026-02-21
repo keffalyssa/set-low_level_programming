@@ -21,8 +21,3 @@ int main(void)
 		printf("Last digit of %d is %d and is less than 6 and not 0\n", n, last);
 	return (0);
 }
-```
-
-Jya kuri:
-```
-https://github.com/keffalyssa/set-low_level_programming/new/main/0x01-variables_if_else_while
