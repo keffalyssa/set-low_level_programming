@@ -1,2 +1,7 @@
-#!/bin/bash
-gcc -E $CFILE -o c 
+chmod +x 0-preprocessor
+```
+
+You'll also need a `README.md` in your `0x00-hello_world` directory — something like:
+```
+# 0x00. C - Hello, World
+This project covers the basics of C programming, including the compilation process: preprocessing, compiling, assembling, and linking.
