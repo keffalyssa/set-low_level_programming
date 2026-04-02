@@ -9,7 +9,7 @@
  */
 int main(int argc, char *argv[])
 {
-int i, j, sum;
+int i, j, sum, num;
 
 sum = 0;
 if (argc == 1)
@@ -27,8 +27,10 @@ printf("Error\n");
 return (1);
 }
 }
+num = 0;
 for (j = 0; argv[i][j] != '\0'; j++)
-sum = sum * 10 + (argv[i][j] - '0');
+num = num * 10 + (argv[i][j] - '0');
+sum += num;
 }
 printf("%d\n", sum);
 return (0);
