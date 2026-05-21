@@ -15,6 +15,8 @@ typedef struct listint_s
 	struct listint_s *next;
 } listint_t;
 
-int sum_listint(listint_t *head);
+size_t print_listint(const listint_t *h);
+listint_t *insert_nodeint_at_index(listint_t **head,
+unsigned int idx, int n);
 
 #endif
