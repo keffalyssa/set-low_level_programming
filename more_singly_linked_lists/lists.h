@@ -18,5 +18,7 @@ typedef struct listint_s
 size_t print_listint(const listint_t *h);
 listint_t *insert_nodeint_at_index(listint_t **head,
 unsigned int idx, int n);
+int delete_nodeint_at_index(listint_t **head,
+unsigned int index);
 
 #endif
