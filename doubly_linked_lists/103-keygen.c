@@ -3,29 +3,18 @@
 #include <string.h>
 
 /**
- * main - keygen for crackme5
- * @argc: argument count
- * @argv: argument vector
+ * get_key - computes the key for a username
+ * @username: the username string
+ * @len: length of username
  *
- * Return: 0 on success
+ * Return: nothing, prints key
  */
-int main(int argc, char *argv[])
+void get_key(char *username, int len)
 {
-	char *charset = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
-	char *username;
-	int len, i;
+	char *cs = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
 	int k0, k1, k2, k3, k4, k5;
-	int sum, prod, max_c, sq_sum;
+	int sum, prod, max_c, sq_sum, i;
 	char key[7];
-
-	if (argc != 2)
-	{
-		fprintf(stderr, "Usage: %s username\n", argv[0]);
-		return (1);
-	}
-
-	username = argv[1];
-	len = strlen(username);
 
 	k0 = (len ^ 0x3b) & 0x3f;
 
@@ -56,14 +45,30 @@ int main(int argc, char *argv[])
 		sum = rand();
 	k5 = (sum ^ 0xe5) & 0x3f;
 
-	key[0] = charset[k0];
-	key[1] = charset[k1];
-	key[2] = charset[k2];
-	key[3] = charset[k3];
-	key[4] = charset[k4];
-	key[5] = charset[k5];
+	key[0] = cs[k0];
+	key[1] = cs[k1];
+	key[2] = cs[k2];
+	key[3] = cs[k3];
+	key[4] = cs[k4];
+	key[5] = cs[k5];
 	key[6] = '\0';
-
 	printf("%s\n", key);
+}
+
+/**
+ * main - keygen for crackme5
+ * @argc: argument count
+ * @argv: argument vector
+ *
+ * Return: 0 on success
+ */
+int main(int argc, char *argv[])
+{
+	if (argc != 2)
+	{
+		fprintf(stderr, "Usage: %s username\n", argv[0]);
+		return (1);
+	}
+	get_key(argv[1], strlen(argv[1]));
 	return (0);
 }
