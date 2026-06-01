@@ -29,6 +29,41 @@ static listint_t *get_loop_node(listint_t *head)
 }
 
 /**
+ * count_unique - counts unique nodes in list
+ * @head: pointer to head
+ * @loop: loop start node or NULL
+ *
+ * Return: total unique node count
+ */
+static size_t count_unique(listint_t *head, listint_t *loop)
+{
+	size_t pre = 0, in_loop = 0;
+	listint_t *cur;
+
+	if (loop == NULL)
+	{
+		while (head != NULL)
+		{
+			pre++;
+			head = head->next;
+		}
+		return (pre);
+	}
+	cur = head;
+	while (cur != loop)
+	{
+		pre++;
+		cur = cur->next;
+	}
+	cur = loop;
+	do {
+		in_loop++;
+		cur = cur->next;
+	} while (cur != loop);
+	return (pre + in_loop);
+}
+
+/**
  * free_listint_safe - frees a listint_t linked list safely
  * @h: pointer to pointer to head of list
  *
@@ -37,13 +72,11 @@ static listint_t *get_loop_node(listint_t *head)
 size_t free_listint_safe(listint_t **h)
 {
 	listint_t *loop = get_loop_node(*h);
-	listint_t *current = *h, *next;
+	size_t total = count_unique(*h, loop);
 	size_t count = 0;
+	listint_t *current = *h, *next;
 
-	if (loop != NULL)
-		loop->next = NULL;
-
-	while (current != NULL)
+	while (count < total)
 	{
 		next = current->next;
 		free(current);
@@ -51,5 +84,5 @@ size_t free_listint_safe(listint_t **h)
 		count++;
 	}
 	*h = NULL;
-	return (count);
+	return (total);
 }
