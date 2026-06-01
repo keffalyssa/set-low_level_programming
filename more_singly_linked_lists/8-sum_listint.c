@@ -1,10 +1,10 @@
 #include "lists.h"
 
 /**
- * sum_listint - returns the sum of all data
- * @head: head of linked list
+ * sum_listint - returns the sum of all data in a listint_t linked list
+ * @head: pointer to the head of the list
  *
- * Return: sum
+ * Return: sum of all data, or 0 if list is empty
  */
 int sum_listint(listint_t *head)
 {
