@@ -24,3 +24,4 @@ unsigned int index);
 #endif
 int sum_listint(listint_t *head);
 listint_t *reverse_listint(listint_t **head);
+size_t print_listint_safe(const listint_t *head);
