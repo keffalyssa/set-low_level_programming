@@ -1,37 +1,60 @@
-#ifndef HASH_TABLES_H
-#define HASH_TABLES_H
-
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+#include "hash_tables.h"
 
 /**
- * struct hash_node_s - Node of a hash table
- * @key: The key (string)
- * @value: The value corresponding to a key
- * @next: A pointer to the next node of the list
+ * hash_table_set - Adds an element to the hash table
+ * @ht: The hash table
+ * @key: The key (cannot be empty string)
+ * @value: The value associated with the key
+ *
+ * Return: 1 if succeeded, 0 otherwise
  */
-typedef struct hash_node_s
+int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	char *key;
-	char *value;
-	struct hash_node_s *next;
-} hash_node_t;
+	hash_node_t *new_node, *tmp;
+	unsigned long int index;
+	char *new_value;
 
-/**
- * struct hash_table_s - Hash table data structure
- * @size: The size of the array
- * @array: An array of size @size
- */
-typedef struct hash_table_s
-{
-	unsigned long int size;
-	hash_node_t **array;
-} hash_table_t;
+	if (ht == NULL || key == NULL || *key == '\0')
+		return (0);
 
-hash_table_t *hash_table_create(unsigned long int size);
-unsigned long int hash_djb2(const unsigned char *str);
-unsigned long int key_index(const unsigned char *key, unsigned long int size);
-int hash_table_set(hash_table_t *ht, const char *key, const char *value);
+	index = key_index((const unsigned char *)key, ht->size);
 
-#endif /* HASH_TABLES_H */
+	tmp = ht->array[index];
+	while (tmp)
+	{
+		if (strcmp(tmp->key, key) == 0)
+		{
+			new_value = strdup(value);
+			if (new_value == NULL)
+				return (0);
+			free(tmp->value);
+			tmp->value = new_value;
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+
+	new_node = malloc(sizeof(hash_node_t));
+	if (new_node == NULL)
+		return (0);
+
+	new_node->key = strdup(key);
+	if (new_node->key == NULL)
+	{
+		free(new_node);
+		return (0);
+	}
+
+	new_node->value = strdup(value);
+	if (new_node->value == NULL)
+	{
+		free(new_node->key);
+		free(new_node);
+		return (0);
+	}
+
+	new_node->next = ht->array[index];
+	ht->array[index] = new_node;
+
+	return (1);
+}
