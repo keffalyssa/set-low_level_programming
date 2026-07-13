@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * free_listint_safe - Frees a listint_t list safely (can free lists with a loop)
+ * free_listint_safe - Frees a listint_t list safely.
  * @h: A pointer to the address of the head of the listint_t list.
  *
  * Return: The size of the list that was freed.
